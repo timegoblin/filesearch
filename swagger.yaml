@@ -1,0 +1,83 @@
+swagger: '2.0'
+basePath: /filesearch/v1.0/
+info:
+  description: >-
+    REST API that allows a configured directory, including subdirectories, to be
+    searched for files containing all words in a supplied list of words
+  title: FileSearch API
+  version: v1.0
+schemes:
+  - http
+  - https
+paths:
+  /words:
+    get:
+      parameters:
+        - name: wordlist
+          in: query
+          type: array
+          minItems: 1
+          collectionFormat: pipes
+          items:
+            type: string
+      summary: Find files containing supplied words.
+      operationId: file-wordsearch
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'All good, lets return results, please note this may be empty.'
+          schema:
+            $ref: '#/definitions/ListOfFiles'
+        '400':
+          $ref: '#/responses/Error400'
+        '401':
+          $ref: '#/responses/Error401'
+        '403':
+          $ref: '#/responses/Error403'
+        '500':
+          $ref: '#/responses/Error500'
+      tags:
+        - file-wordsearch
+responses:
+  Error400:
+    description: Input Invalid for the API request.
+    schema:
+      $ref: '#/definitions/Error'
+  Error401:
+    description: Unauthorized. Caller is not authenticated.
+    headers:
+      WWW-Authenticate:
+        type: string
+        description: Please authenticate to continue.
+  Error403:
+    description: The user does not have the requisite security to perform the API request.
+    schema:
+      $ref: '#/definitions/Error'
+  Error500:
+    description: 'Internal Server Error, serving this endpoint is not currently possible.'
+    schema:
+      $ref: '#/definitions/Error'
+definitions:
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        minimum: 1
+      message:
+        type: string
+        minimum: 1
+    required:
+      - code
+      - message
+  ListOfFiles:
+    type: object
+    properties:
+      files:
+        type: array
+        items:
+          type: string
+          minItems: 0
+    required:
+      - files
