@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+		"http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+<module name="Checker">
+	<module name="JavadocPackage"/>
+	<module name="FileLength">
+		<property name="max" value="1200"/>
+	</module>
+	<module name="FileTabCharacter"/>
+	<module name="RegexpSingleline">
+		<property name="format" value="System\.((out|err))\."/>
+	</module>
+	<module name="RegexpSingleline">
+		<property name="format" value="Boolean\.getBoolean"/>
+	</module>
+
+	<!-- this will be usefull on production code
+	<module name="RegexpSingleline">
+		<property name="format" value="javax\.persistence\.EntityManager"/>
+	</module> -->
+	<module name="TreeWalker">
+		<property name="cacheFile" value="${basedir}/target/checkstyle.cache"/>
+		<property name="tabWidth" value="4"/>
+		<module name="IllegalCatch"/>
+		<module name="ConstantName"/>
+		<module name="AvoidStarImport"/>
+		<module name="EmptyBlock">
+			<property name="option" value="text"/>
+		</module>
+		<module name="EmptyForIteratorPad"/>
+		<module name="EqualsHashCode"/>
+		<module name="IllegalInstantiation"/>
+		<module name="JavadocMethod"/>
+		<module name="JavadocVariable"/>
+		<module name="JavadocStyle">
+			<property name="checkEmptyJavadoc" value="true"/>
+		</module>
+		<module name="LineLength">
+			<property name="ignorePattern" value="^ *\* *[^ ]+$"/>
+			<property name="max" value="140"/>
+		</module>
+		<module name="LocalFinalVariableName"/>
+		<module name="LocalVariableName"/>
+		<module name="MemberName"/>
+		<module name="MethodLength">
+			<property name="max" value="150"/>
+		</module>
+		<module name="MethodName"/>
+		<module name="ModifierOrder"/>
+		<module name="NeedBraces"/>
+		<module name="PackageName"/>
+		<module name="ParameterName"/>
+		<module name="ParameterNumber">
+			<property name="max" value="6"/>
+		</module>
+		<module name="RedundantImport"/>
+		<module name="RedundantModifier">
+			<property name="tokens" value="METHOD_DEF"/>
+		</module>
+		<module name="StaticVariableName"/>
+		<module name="TypeName"/>
+		<module name="UnusedImports"/>
+		<module name="UpperEll"/>
+		<module name="VisibilityModifier"/>
+		<module name="TrailingComment"/>
+		<module name="Regexp">
+			<property name="format" value="Copyright \(c\) 20\d{2} Altus Group\. All Rights Reserved"/>
+		</module>
+	</module>
+	<module name="SuppressionFilter">
+		<property name="file" value="resources/checkstyle/suppressions.xml"/>
+	</module>
+
+</module>
